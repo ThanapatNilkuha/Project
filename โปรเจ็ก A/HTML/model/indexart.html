@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แสดงสินค้า Art toy</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .grid-item {
+            border: 1px solid #d4a373;
+            padding: 10px;
+            text-align: center;
+            background-color: #fff9f0;
+            border-radius: 8px;
+        }
+
+        .grid-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .grid-item h3 {
+            font-size: 1.2em;
+            color: #5b3924;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-content {
+            background-color: #fdf4e3;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #5b3924;
+        }
+
+        .add-to-cart {
+            background-color: #e65c00;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #ff6600;
+        }
+
+        nav {
+            background-color: #f8e5c3;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            padding: 10px 15px;
+            color: #5b3924;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: #fff2db;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background-color: #d4a373;
+        }
+
+        .cart-button {
+            display: flex;
+            align-items: center;
+            background-color: #5b3924;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cart-button:hover {
+            background-color: #3b2a1a;
+        }
+
+        .cart-count {
+            background-color: #e65c00;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>แสดงสินค้า Art toy</h1>
+        </header>
+        <nav>
+            <div class="nav-links">
+                <a href="Home.html">หน้าแรก</a>
+                <a href="about.html">เกี่ยวกับเรา</a>
+                <a href="services.html">บริการของเรา</a>
+                <a href="contact.html">ติดต่อเรา</a>
+                <a href="blog.html">บทความ</a>
+            </div>
+            <select onchange="location = this.value;">
+                <option value="">เลือกประเภท</option>
+                <option value="indexart.html">Art toy</option>
+                <option value="westbu.html">Model</option>
+            </select>
+            <button class="cart-button" onclick="goToCart()">
+                ตะกร้า
+                <span id="cart-count" class="cart-count">0</span>
+            </button>
+        </nav>
+        <article>
+            <div class="grid-container">
+                <!-- Example product 1 -->
+                <div class="grid-item">
+                    <img src="../../poto/art1/Art toy/1.webp" alt="Product Image 1" onclick="openPopup('popupArtToy1')">
+                    <h3>สินค้า Art toy ที่ 1</h3>
+                </div>
+                <!-- Popup for product 1 -->
+                <div id="popupArtToy1" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupArtToy1')">&times;</span>
+                        <img src="../../poto/art1/Art toy/1.webp" alt="Product Image 1">
+                        <h3>สินค้า Art toy ที่ 1</h3>
+                        <p>รายละเอียดสินค้า...</p>
+                        <button class="add-to-cart" onclick="addToCart('1.webp', 'สินค้า Art toy ที่ 1', 199, 'Art toy', 'popupArtToy1')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+
+                <!-- Example product 2 -->
+                <div class="grid-item">
+                    <img src="../../poto/art1/Art toy/2.webp" alt="Product Image 2" onclick="openPopup('popupArtToy2')">
+                    <h3>สินค้า Art toy ที่ 2</h3>
+                </div>
+                <!-- Popup for product 2 -->
+                <div id="popupArtToy2" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupArtToy2')">&times;</span>
+                        <img src="../../poto/art1/Art toy/2.webp" alt="Product Image 2">
+                        <h3>สินค้า Art toy ที่ 2</h3>
+                        <p>รายละเอียดสินค้า...</p>
+                        <button class="add-to-cart" onclick="addToCart('2.webp', 'สินค้า Art toy ที่ 2', 299, 'Art toy', 'popupArtToy2')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+
+                <!-- Example product 3 -->
+                <div class="grid-item">
+                    <img src="../../poto/art1/Art toy/3.webp" alt="Product Image 3" onclick="openPopup('popupArtToy3')">
+                    <h3>สินค้า Art toy ที่ 3</h3>
+                </div>
+                <!-- Popup for product 3 -->
+                <div id="popupArtToy3" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupArtToy3')">&times;</span>
+                        <img src="../../poto/art1/Art toy/3.webp" alt="Product Image 3">
+                        <h3>สินค้า Art toy ที่ 3</h3>
+                        <p>รายละเอียดสินค้า...</p>
+                        <button class="add-to-cart" onclick="addToCart('3.webp', 'สินค้า Art toy ที่ 3', 399, 'Art toy', 'popupArtToy3')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+
+                <!-- Example product 4 -->
+                <div class="grid-item">
+                    <img src="../../poto/art1/Art toy/4.webp" alt="Product Image 4" onclick="openPopup('popupArtToy4')">
+                    <h3>สินค้า Art toy ที่ 4</h3>
+                </div>
+                <!-- Popup for product 4 -->
+                <div id="popupArtToy4" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupArtToy4')">&times;</span>
+                        <img src="../../poto/art1/Art toy/4.webp" alt="Product Image 4">
+                        <h3>สินค้า Art toy ที่ 4</h3>
+                        <p>รายละเอียดสินค้า...</p>
+                        <button class="add-to-cart" onclick="addToCart('4.webp', 'สินค้า Art toy ที่ 4', 499, 'Art toy', 'popupArtToy4')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <script>
+        function openPopup(popupId) {
+            document.getElementById(popupId).style.display = 'flex';
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        function addToCart(image, name, price, type, popupId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let item = cart.find(item => item.image === image && item.type === type);
+            if (item) {
+                item.quantity += 1;
+            } else {
+                cart.push({ image, name, price, quantity: 1, type });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            closePopup(popupId); // ปิด popup หลังจากเพิ่มลงตะกร้า
+            setTimeout(() => {
+                window.location.href = 'sellModel.html';
+            }, 100);
+        }
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        function goToCart() {
+            window.location.href = 'sellModel.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

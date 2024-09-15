@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ร้านกำหมุด</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            display: block;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 24px;
+            padding: 8px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: #333;
+        }
+        .product-price {
+            font-size: 28px;
+            color: red;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .new {
+            text-align: center;
+            color: red;
+            font-size: 50px;
+        }
+        .buy-now-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .buy-now-btn {
+            background-color: #ff6600;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #e65c00;
+        }
+    </style>
+</head>
+<body>
+    <h1>สินค้าเอเชีย</h1>
+    <nav>
+        <ul>
+            <li><a href="about.html">เกี่ยวกับเรา</a></li>
+            <li><a href="services.html">บริการของเรา1</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+            <li><a href="blog.html">บทความ</a></li>
+            <li><a href="login.html">สมัครสมาชิก</a></li>
+        </ul>
+    </nav>
+    
+    <button onclick="window.location.href='/HTML/index.html'">ย้อนกลับ</button><br>
+    <div class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-item">
+                <img src="/poto/art1/Art toy/atr toy.webp" alt="Promo 1">
+            </div>
+    
+            <div class="carousel-item">
+                <img src="/poto/art1/Art toy/1.webp" alt="Promo 2">
+            </div>
+
+            <div class="carousel-item">
+                <img src="/poto/art1/Art toy/2.webp" alt="Information">
+            </div>
+    
+            <div class="carousel-item">
+                <img src="/poto/art1/Art toy/3.webp" alt="Promo Banner">
+            </div>
+            <div class="product-price">
+                ฿500 
+                <span class="product-old-price">฿500</span>
+            </div>
+        </div>
+    
+        <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+        <a class="next" onclick="moveSlide(1)">&#10095;</a>
+    </div>
+    <div class="new">
+        NEW
+    </div>
+    <h1>Skullpanda The sound</h1>
+    <div class="product-price">
+        ฿500
+    <div class="buy-now-btn-container">
+        <a href="sell.html" class="buy-now-btn">ซื้อเลย</a>
+    </div>
+    <script>
+        let slideIndex = 0;
+const slides = document.querySelectorAll('.carousel-item');
+const totalSlides = slides.length;
+
+function moveSlide(n) {
+    slideIndex += n;
+    if (slideIndex >= totalSlides) {
+        slideIndex = 0;
+    } else if (slideIndex < 0) {
+        slideIndex = totalSlides - 1;
+    }
+    updateSlidePosition();
+}
+
+function updateSlidePosition() {
+    document.querySelector('.carousel-container').style.transform = `translateX(${-slideIndex * 100}%)`;
+}
+    </script>
+
+</body>
+</html>

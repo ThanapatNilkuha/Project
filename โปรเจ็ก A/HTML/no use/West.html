@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ร้านกำหมุด</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+        .grid-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>ยินดีต้อนรับสูปักหมุดช้อบ</h1>
+    <nav>
+        <ul>
+            <li><a href="about.html">เกี่ยวกับเรา</a></li>
+            <li><a href="services.html">บริการของเรา1</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+            <li><a href="blog.html">บทความ</a></li>
+            <li><a href="login.html">สมัครสมาชิก</a></li>
+        </ul>
+    </nav>
+    <div class="grid-container">
+        <!-- ตัวอย่างสินค้าที่ 1 -->
+        <div class="grid-item">
+            <a href="/HTML/model/Model.html"><img src="/poto/art1/Model/1.webp" alt="Product Image 1"></a>
+            <h3>GOLDEN HEAD My Cat Is A Kawaii Girl</h3>
+            <p>199</p> 
+        </div>
+        <!-- ตัวอย่างสินค้าที่ 2 -->
+        <div class="grid-item">
+            <img src="path/to/image2.jpg" alt="Product Image 2">
+            <h3>สินค้าที่ 2</h3>
+            <p>รายละเอียดสินค้า...</p>
+        </div>
+</body>
+</html>

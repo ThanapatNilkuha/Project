@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สมัครสมาชิก</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <style>
+        /* สไตล์ป็อปอัป */
+        .popup {
+            display: none; /* ซ่อนป็อปอัปไว้ก่อน */
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        
+        .popup-overlay {
+            display: none; /* ซ่อน overlay */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .popup button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .popup button:hover {
+            background-color: #c0392b;
+        }
+
+        /* สไตล์สำหรับข้อความแจ้งเตือน */
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box">
+        <h1>ลงชื่อเข้าใช้</h1>
+        <p>กรุณากรอกข้อมูลส่วนตัวเพื่อลงทะเบียน</p>
+
+        <form id="register-form">
+            <label>กรอกอีเมล :</label><br>
+            <input type="email" id="email" name="std-mail"><br>
+            <span id="email-error" class="error"></span><br>
+
+            <label>กรอกชื่อ ID. :</label><br>
+            <input type="text" id="username" name="std-name"><br>
+            <span id="username-error" class="error"></span><br>
+
+            <label>กรอกรหัสผ่าน :</label><br>
+            <input type="password" id="password" name="pass"><br>
+            <span id="password-error" class="error"></span><br>
+
+            <label>กรอกรหัสผ่านอีกครั้ง :</label><br>
+            <input type="password" id="confirm-password" name="confirm-pass"><br>
+            <span id="confirm-password-error" class="error"></span><br>
+
+            <!-- ปุ่มสมัคร -->
+            <br><button type="button" onclick="validateForm()">สมัคร</button>
+        </form>
+
+        <!-- ป็อปอัป -->
+        <div class="popup-overlay" id="popup-overlay"></div>
+        <div class="popup" id="popup">
+            <h2>ยืนยันการสมัคร</h2>
+            <p>คุณได้สมัครเรียบร้อยแล้ว!</p>
+            <button onclick="closePopup()">ปิด</button>
+        </div>
+
+        <!-- ปุ่มย้อนกลับ -->
+        <br><button onclick="window.location.href='index.html'">ย้อนกลับ</button><br>
+
+    </div>
+
+    <script>
+        // ฟังก์ชันแสดงป็อปอัป
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('popup-overlay').style.display = 'block';
+        }
+
+        // ฟังก์ชันปิดป็อปอัป
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('popup-overlay').style.display = 'none';
+        }
+
+        // ฟังก์ชันตรวจสอบฟอร์ม
+        function validateForm() {
+            // ดึงค่าจากฟิลด์
+            var email = document.getElementById('email').value;
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            // ซ่อนข้อความแจ้งเตือนก่อน
+            document.getElementById('email-error').textContent = "";
+            document.getElementById('username-error').textContent = "";
+            document.getElementById('password-error').textContent = "";
+            document.getElementById('confirm-password-error').textContent = "";
+
+            var isValid = true;
+
+            // ตรวจสอบว่าฟิลด์ถูกกรอกหรือไม่
+            if (email === "") {
+                document.getElementById('email-error').textContent = "กรุณากรอกอีเมล";
+                isValid = false;
+            }
+
+            if (username === "") {
+                document.getElementById('username-error').textContent = "กรุณากรอกชื่อผู้ใช้";
+                isValid = false;
+            }
+
+            if (password === "") {
+                document.getElementById('password-error').textContent = "กรุณากรอกรหัสผ่าน";
+                isValid = false;
+            }
+
+            if (confirmPassword === "") {
+                document.getElementById('confirm-password-error').textContent = "กรุณากรอกรหัสผ่านอีกครั้ง";
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                document.getElementById('confirm-password-error').textContent = "รหัสผ่านไม่ตรงกัน";
+                isValid = false;
+            }
+
+            // ถ้าทุกฟิลด์ถูกต้อง ให้แสดงป็อปอัป
+            if (isValid) {
+                showPopup();
+            }
+        }
+    </script>
+</body>
+</html>
