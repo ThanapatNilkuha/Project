@@ -14,7 +14,6 @@ def add_record(file_name, disaster_id, disaster_type, disaster_location,
                num_volunteers, severity_measure, num_injured, num_deaths, timestamp):
     records = []
     
-    # อ่านข้อมูลเก่าทั้งหมด
     try:
         with open(file_name, 'rb') as f:
             while record := f.read(record_size):
@@ -22,16 +21,13 @@ def add_record(file_name, disaster_id, disaster_type, disaster_location,
                     unpacked_data = struct.unpack(record_format, record)
                     records.append(unpacked_data)
     except FileNotFoundError:
-        # ถ้าไฟล์ไม่พบ จะสร้างไฟล์ใหม่เมื่อเพิ่มข้อมูล
-        pass
+        pass  # ถ้าไฟล์ไม่พบ จะสร้างไฟล์ใหม่เมื่อเพิ่มข้อมูล
 
-    # ตรวจสอบว่ามี ID นี้อยู่แล้วหรือไม่
     for record in records:
         if record[0] == disaster_id:
             print("ID นี้มีอยู่แล้ว กรุณาเลือก ID ใหม่")
             return
 
-    # ถ้าเป็น ID ใหม่ ให้เพิ่มข้อมูล
     packed_data = struct.pack(
         record_format,
         disaster_id,
@@ -45,7 +41,6 @@ def add_record(file_name, disaster_id, disaster_type, disaster_location,
     )
     records.append(struct.unpack(record_format, packed_data))  # เพิ่มข้อมูลที่แพ็คแล้วลงใน records
 
-    # บันทึกข้อมูลใหม่ลงในไฟล์
     with open(file_name, 'wb') as f:
         for record in records:
             packed_data = struct.pack(
@@ -62,6 +57,60 @@ def add_record(file_name, disaster_id, disaster_type, disaster_location,
             f.write(packed_data)
     print("เพิ่มข้อมูลสำเร็จ")
 
+
+# def add_record(file_name, disaster_id, disaster_type, disaster_location, 
+#                num_volunteers, severity_measure, num_injured, num_deaths, timestamp):
+#     records = []
+    
+#     # อ่านข้อมูลเก่าทั้งหมด
+#     try:
+#         with open(file_name, 'rb') as f:
+#             while record := f.read(record_size):
+#                 if len(record) == record_size:
+#                     unpacked_data = struct.unpack(record_format, record)
+#                     records.append(unpacked_data)
+#     except FileNotFoundError:
+#         # ถ้าไฟล์ไม่พบ จะสร้างไฟล์ใหม่เมื่อเพิ่มข้อมูล
+#         pass
+
+#     # ตรวจสอบว่ามี ID นี้อยู่แล้วหรือไม่
+#     for record in records:
+#         if record[0] == disaster_id:
+#             print("ID นี้มีอยู่แล้ว กรุณาเลือก ID ใหม่")
+#             return
+
+#     # ถ้าเป็น ID ใหม่ ให้เพิ่มข้อมูล
+#     packed_data = struct.pack(
+#         record_format,
+#         disaster_id,
+#         format_string(disaster_type),
+#         format_string(disaster_location),
+#         num_volunteers,
+#         severity_measure,
+#         num_injured,
+#         num_deaths,  # เพิ่มจำนวนผู้เสียชีวิต
+#         format_string(timestamp)
+#     )
+#     records.append(struct.unpack(record_format, packed_data))  # เพิ่มข้อมูลที่แพ็คแล้วลงใน records
+
+#     # บันทึกข้อมูลใหม่ลงในไฟล์
+#     with open(file_name, 'wb') as f:
+#         for record in records:
+#             packed_data = struct.pack(
+#                 record_format,
+#                 record[0],
+#                 record[1],
+#                 record[2],
+#                 record[3],
+#                 record[4],
+#                 record[5],
+#                 record[6],
+#                 record[7]
+#             )
+#             f.write(packed_data)
+#     print("เพิ่มข้อมูลสำเร็จ")
+
+# ฟังก์ชันแสดงข้อมูลตามประเภทภัยพิบัติที่เลือก
 def display_records_by_disaster_type(file_name):
     disaster_types = ["พายุ", "น้ำท่วม", "ภัยแล้ง", "ดินถล่ม"]
     print("เลือกประเภทภัยพิบัติที่ต้องการแสดง:")
@@ -74,17 +123,19 @@ def display_records_by_disaster_type(file_name):
     try:
         with open(file_name, 'rb') as f:
             print(f"\nแสดงข้อมูลสำหรับภัยพิบัติ: {selected_disaster_type}")
+            found = False  # ตัวแปรสำหรับเช็คว่ามีข้อมูลหรือไม่
             while (record := f.read(record_size)):
                 if len(record) != record_size:
                     print("ข้อมูลในไฟล์มีขนาดไม่ถูกต้อง")
                     continue  # ข้ามบันทึกที่มีขนาดไม่ถูกต้อง
 
                 unpacked_data = struct.unpack(record_format, record)
-                disaster_type = unpacked_data[1].decode('utf-8').strip()
+                disaster_type = unpacked_data[1].decode('utf-8').strip().replace('\x00', '')
 
+                # เปรียบเทียบประเภทภัยพิบัติ
                 if disaster_type == selected_disaster_type:
-                    disaster_location = unpacked_data[2].decode('utf-8').strip()
-                    timestamp = unpacked_data[7].decode('utf-8').strip()
+                    disaster_location = unpacked_data[2].decode('utf-8').strip().replace('\x00', '')
+                    timestamp = unpacked_data[7].decode('utf-8').strip().replace('\x00', '')
                     print(f"ID: {unpacked_data[0]}\n"
                           f"ประเภท: {disaster_type}\n"
                           f"สถานที่: {disaster_location}\n"
@@ -93,10 +144,16 @@ def display_records_by_disaster_type(file_name):
                           f"บาดเจ็บ: {unpacked_data[5]}\n"
                           f"เสียชีวิต: {unpacked_data[6]}\n"
                           f"วันที่: {timestamp}\n")
+                    found = True  # ถ้าพบข้อมูลให้ปรับตัวแปรนี้
+
+            if not found:
+                print("ไม่พบข้อมูลสำหรับประเภทภัยพิบัติที่เลือก")
     except FileNotFoundError:
         print("ไม่พบไฟล์ข้อมูล")
     except struct.error as e:
         print(f"ข้อผิดพลาดในการถอดรหัสข้อมูล: {e}")
+
+
 
 
 
@@ -130,6 +187,7 @@ def update_record(file_name, disaster_id):
                     num_volunteers = int(input("จำนวนอาสาสมัคร: "))
                     severity_measure = float(input("ค่าวัดความรุนแรง: "))
                     num_injured = int(input("จำนวนผู้บาดเจ็บ: "))
+                    num_deaths = int(input("จำนวนผู้เสียชีวิต: "))  # เพิ่มการขอข้อมูลจำนวนผู้เสียชีวิต
                     timestamp = input("กรุณาใส่วันที่ (วัน/เดือน/ปี): ")
                     
                     # ใช้วันที่ปัจจุบันถ้าไม่กรอก
@@ -145,7 +203,7 @@ def update_record(file_name, disaster_id):
                         num_volunteers,
                         severity_measure,
                         num_injured,
-                        0,  # จำนวนผู้เสียชีวิต ไม่ได้ใช้งาน
+                        num_deaths,  # เพิ่มจำนวนผู้เสียชีวิต
                         format_string(timestamp)
                     )
                     records.append(new_data)  # เพิ่มข้อมูลใหม่
@@ -236,14 +294,13 @@ def main():
             num_volunteers = int(input("จำนวนอาสาสมัคร: "))
             severity_measure = float(input("ค่าวัดความรุนแรง: "))
             num_injured = int(input("จำนวนผู้บาดเจ็บ: "))
+            num_deaths = int(input("จำนวนผู้เสียชีวิต: "))  # เพิ่มการขอข้อมูลจำนวนผู้เสียชีวิต
             timestamp = input("กรุณาใส่วันที่ (วัน/เดือน/ปี): ")
             add_record(file_name, disaster_id, disaster_type, disaster_location, 
-                       num_volunteers, severity_measure, num_injured, 0, timestamp)
+                       num_volunteers, severity_measure, num_injured, num_deaths, timestamp)
 
-        # แสดงข้อมูลตามประเภทภัยพิบัติที่เลือก
         elif choice == '2':
             display_records_by_disaster_type(file_name)
-
 
         elif choice == '3':
             disaster_id = int(input("กรุณาใส่ ID ที่ต้องการอัปเดต: "))
