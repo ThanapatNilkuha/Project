@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แสดงสินค้า Model</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .grid-item {
+            border: 1px solid #d4a373;
+            padding: 10px;
+            text-align: center;
+            background-color: #fff9f0;
+            border-radius: 8px;
+        }
+
+        .grid-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .grid-item h3 {
+            font-size: 1.2em;
+            color: #5b3924;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-content {
+            background-color: #fdf4e3;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #5b3924;
+        }
+
+        .add-to-cart {
+            background-color: #e65c00;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #ff6600;
+        }
+
+        nav {
+            background-color: #f8e5c3;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            padding: 10px 15px;
+            color: #5b3924;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: #fff2db;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background-color: #d4a373;
+        }
+
+        .cart-button {
+            display: flex;
+            align-items: center;
+            background-color: #5b3924;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cart-button:hover {
+            background-color: #3b2a1a;
+        }
+
+        .cart-count {
+            background-color: #e65c00;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+            .grid-item img {
+            width: 400px; 
+            height: 400px; 
+            object-fit: cover; 
+        }
+
+       
+         .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff2db;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 90%; 
+            max-height: 90%; 
+            overflow: auto; 
+        }
+
+        .popup-content {
+            padding: 20px;
+            text-align: center;
+            max-width: 400px; 
+            margin: 0 auto; 
+        }
+
+        .popup img {
+            width: 100%; 
+            height: auto; 
+            object-fit: contain;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>แสดงสินค้า Model</h1>
+        </header>
+        <nav>
+            <div class="nav-links">
+                <a href="../Home.html">หน้าแรก</a>
+                <a href="../about.html">เกี่ยวกับเรา</a>
+                <a href="../services.html">บริการของเรา</a>
+                <a href="../contact.html">ติดต่อเรา</a>
+            </div>
+            <select onchange="location = this.value;">
+                <option value="">Sort</option>
+                <option value="indexart.html">Art toy</option>
+                <option value="westbu.html">Model</option>
+            </select>
+            <button class="cart-button" onclick="goToCart()">
+                ตะกร้า
+                <span id="cart-count" class="cart-count">0</span>
+            </button>
+        </nav>
+        <article>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <img src="../poto/art1/Model/1.webp" alt="Product Image 1" onclick="openPopup('popupModel1')">
+                    <h3>สินค้า cat</h3>
+                    <h3>199 บาท</h3>
+                </div>
+                <div id="popupModel1" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupModel1')">&times;</span>
+                        <img src="../poto/art1/Model/1.webp" alt="Product Image 1">
+                        <h3>สินค้า cat</h3>
+                        <p>แมว</p>
+                        <label for="quantity1">เลือกจำนวน:</label>
+                        <input type="number" id="quantity1" min="1" value="1" style="width: 50px;">
+                        <button class="add-to-cart" onclick="addToCart('1.webp', 'สินค้า cat', 199, 'Model', 'popupModel1','quantity1')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="../poto/art1/Model/1.jpg" alt="Product Image 2" onclick="openPopup('popupModel2')">
+                    <h3>สินค้า Frieren</h3>
+                    <h3>1100 บาท</h3>
+                </div>
+                <div id="popupModel2" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupModel2')">&times;</span>
+                        <img src="../poto/art1/Model/1.jpg" alt="Product Image 2">
+                        <h3>สินค้า Frieren</h3>
+                        <p>(Pre-Sale)(MD) Luminasta "Frieren: Beyond Journey's End" "Frieren" ~In Vorig~</p>
+                        <label for="quantity2">เลือกจำนวน:</label>
+                        <input type="number" id="quantity2" min="1" value="1" style="width: 50px;">
+                        <button class="add-to-cart" onclick="addToCart('1.jpg', 'Frieren', 1100, 'Model', 'popupModel2','quantity2')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="../poto/art1/Model/2.jpg" alt="Product Image 3" onclick="openPopup('popupModel3')">
+                    <h3>สินค้า Chisato Nishikigi</h3>
+                    <h3>1090 บาท</h3>
+                </div>
+                <div id="popupModel3" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupModel3')">&times;</span>
+                        <img src="../poto/art1/Model/2.jpg" alt="Product Image 3">
+                        <h3>สินค้า Chisato Nishikigi</h3>
+                        <p>(Pre-Sale)(MD) Luminasta "Lycoris Recoil" "Chisato Nishikigi - Going out in a yukata"</p>
+                        <label for="quantity3">เลือกจำนวน:</label>
+                        <input type="number" id="quantity3" min="1" value="1" style="width: 50px;">
+                        <button class="add-to-cart" onclick="addToCart('2.jpg', 'Chisato Nishikigi', 1090, 'Model', 'popupModel3','quantity3')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="../poto/art1/Model/3.jpg" alt="Product Image 4" onclick="openPopup('popupModel4')">
+                    <h3>สินค้า Nekomata Okayu</h3>
+                    <h3>1390 บาท</h3>
+                </div>
+                <div id="popupModel4" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupModel4')">&times;</span>
+                        <img src="../poto/art1/Model/3.jpg" alt="Product Image 4">
+                        <h3>สินค้า Nekomata Okayu</h3>
+                        <p>(MD) Pop Up Parade Nekomata Okayu: Hololive Production (Re-run)</p>
+                        <label for="quantity4">เลือกจำนวน:</label>
+                        <input type="number" id="quantity4" min="1" value="1" style="width: 50px;">
+                        <button class="add-to-cart" onclick="addToCart('3.jpg', 'Nekomata Okayu', 1390, 'Model', 'popupModel4','quantity4')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="../poto/art1/Model/4.png" alt="Product Image 5" onclick="openPopup('popupModel5')">
+                    <h3>สินค้า Inugami Korone</h3>
+                    <h3>1390 บาท</h3>
+                </div>
+                <div id="popupModel5" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupModel5')">&times;</span>
+                        <img src="../poto/art1/Model/4.png" alt="Product Image 5">
+                        <h3>สินค้า Inugami Korone</h3>
+                        <p>(MD) POP UP PARADE Inugami Korone: Hololive Production (Re-run)</p>
+                        <label for="quantity5">เลือกจำนวน:</label>
+                        <input type="number" id="quantity5" min="1" value="1" style="width: 50px;">
+                        <button class="add-to-cart" onclick="addToCart('4.png', 'Inugami Korone', 1390, 'Model', 'popupModel5','quantity5')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="../poto/art1/Model/5.jpg" alt="Product Image 6" onclick="openPopup('popupModel6')">
+                    <h3>สินค้า Pekora</h3>
+                    <h3>1890 บาท</h3>
+                </div>
+                <div id="popupModel6" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupModel6')">&times;</span>
+                        <img src="../poto/art1/Model/5.jpg" alt="Product Image 6">
+                        <h3>สินค้า Pekora</h3>
+                        <p>(MD) Nendoroid Usada Pekora: Hololive Production</p>
+                        <label for="quantity6">เลือกจำนวน:</label>
+                        <input type="number" id="quantity6" min="1" value="1" style="width: 50px;">
+                        <button class="add-to-cart" onclick="addToCart('5.jpg', 'Pekora', 1890, 'Model', 'popupModel6','quantity6')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="../poto/art1/Model/6.webp" alt="Product Image 7" onclick="openPopup('popupModel7')">
+                    <h3>สินค้า Gawr Gura</h3>
+                    <h3>749 บาท</h3>
+                </div>
+                <div id="popupModel7" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupModel7')">&times;</span>
+                        <img src="../poto/art1/Model/6.webp" alt="Product Image 7">
+                        <h3>สินค้า Gawr Gura</h3>
+                        <p>Hololive Production Pop Up Parade Gawr Gura</p>
+                        <label for="quantity7">เลือกจำนวน:</label>
+                        <input type="number" id="quantity7" min="1" value="1" style="width: 50px;">
+                        <button class="add-to-cart" onclick="addToCart('6.webp', 'Gawr Gura', 749, 'Model', 'popupModel7','quantity7')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="../poto/art1/Model/7.jpg" alt="Product Image 8" onclick="openPopup('popupModel8')">
+                    <h3>สินค้า Hitori Gotoh</h3>
+                    <h3>2860 บาท</h3>
+                </div>
+                <div id="popupModel8" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupModel8')">&times;</span>
+                        <img src="../poto/art1/Model/7.jpg" alt="Product Image 8">
+                        <h3>สินค้า Hitori Gotoh</h3>
+                        <p>(Pre-Sale)(MD) TENITOL Hitori Gotoh cafe clerk-style ver.</p>
+                        <label for="quantity8">เลือกจำนวน:</label>
+                        <input type="number" id="quantity8" min="1" value="1" style="width: 50px;">
+                        <button class="add-to-cart" onclick="addToCart('7.jpg', 'Hitori Gotoh', 2860, 'Model', 'popupModel8','quantity8')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="../poto/art1/Model/8.jpg" alt="Product Image 9" onclick="openPopup('popupModel9')">
+                    <h3>สินค้า Takina Inoue</h3>
+                    <h3>2735 บาท</h3>
+                </div>
+                <div id="popupModel9" class="popup">
+                    <div class="popup-content">
+                        <span class="close" onclick="closePopup('popupModel9')">&times;</span>
+                        <img src="../poto/art1/Model/8.jpg" alt="Product Image 9">
+                        <h3>สินค้า Takina Inoue</h3>
+                        <p>(MD) TENITOL Takina Inoue</p>
+                        <label for="quantity9">เลือกจำนวน:</label>
+                        <input type="number" id="quantity9" min="1" value="1" style="width: 50px;">
+                        <button class="add-to-cart" onclick="addToCart('8.jpg', 'Takina Inoue', 2735, 'Model', 'popupModel9','quantity9')">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <script>
+        function openPopup(popupId, type) {
+            document.getElementById(popupId).style.display = "flex";
+            resetQuantity(type); 
+        }
+    
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+    
+        function addToCart(image, name, price, type, popupId, quantityId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let quantity = parseInt(document.getElementById(quantityId).value); 
+    
+            let item = cart.find(item => item.image === image && item.type === type);
+            if (item) {
+                item.quantity += quantity; 
+            } else {
+                cart.push({ image, name, price, quantity: quantity, type }); 
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+       
+            closePopup(popupId);
+            
+           
+            alert("เพิ่มลงตะกร้าแล้ว");
+        }
+    
+        function resetQuantity(type) {
+            document.getElementById(`quantity${type}`).value = 1; 
+        }
+    
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+    
+        function goToCart() {
+            window.location.href = 'sellModel.html';
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+    </script>
+    
+</body>
+</html>

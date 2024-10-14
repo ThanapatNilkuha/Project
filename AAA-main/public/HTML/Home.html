@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONA-MONA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .slider {
+            position: relative;
+            width: 40%;
+            height: 400px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 200%; 
+        }
+
+        .slide {
+            width: 50%; 
+            flex-shrink: 0;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain; 
+        }
+
+ 
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 18px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+
+        @media (max-width: 600px) {
+            .slider {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to our shop MONA-MONA</h1>
+        </header>
+        <nav>
+            <div class="nav-links">
+                <a href="Home.html">หน้าแรก</a>
+                <a href="about.html">เกี่ยวกับเรา</a>
+                <a href="services.html">บริการของเรา</a>
+                <a href="contact.html">ติดต่อเรา</a>
+            </div>
+            <select onchange="location = this.value;">
+                <option value="">Sort</option>
+                <option value="model/westbu.html">Model</option>
+                <option value="model/indexart.html">Art toy</option>
+            </select>
+        </nav>
+        <article>
+            <h2>Product Preview</h3>
+            <div class="image-container">
+                <div class="slider">
+                    <div class="slides">
+                        <div class="slide">
+                            <img src="poto/art1/Model/3.jpg">
+                        </div>
+                        <div class="slide">
+                            <img src="poto/art1/Model/2.jpg">
+                        </div>
+                        <div class="slide">
+                            <img src="poto/art1/Model/8.jpg">
+                        </div>
+                        <div class="slide">
+                            <img src="poto/art1/Art toy/5.webp">
+                        </div>
+                        <div class="slide">
+                            <img src="poto/art1/Art toy/7.webp">
+                        </div>
+                        <div class="slide">
+                            <img src="poto/art1/Art toy/2.webp">
+                        </div>
+                    </div>
+                    <button class="prev" onclick="changeSlide(-1)">❮</button>
+                    <button class="next" onclick="changeSlide(1)">❯</button>
+                </div>
+            </div>
+        </article>
+        <footer>
+            <p>
+                ผู้จัดทำ เจตริล เจริญทอง 
+                <button class="link-button" onclick="window.open('https://www.facebook.com/profile.php?id=100020211816580', '_blank')">ไปที่ Facebook</button>
+            </p>
+            <p>
+                ผู้จัดทำ ธนพัฒน์ นิลคูหา 
+                <button class="link-button" onclick="window.open('https://www.facebook.com/thanapat.nilkuha', '_blank')">ไปที่ Facebook</button>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = slides.children.length;
+
+        function showSlides() {
+            if (slideIndex >= totalSlides) slideIndex = 0; 
+            if (slideIndex < 0) slideIndex = totalSlides - 1;
+            slides.style.transform = `translateX(-${slideIndex * 50}%)`;
+        }
+
+        function changeSlide(n) {
+            slideIndex += n;
+            showSlides();
+        }
+
+        setInterval(() => {
+            slideIndex++;
+            showSlides();
+        }, 3000);
+    </script>
+</body>
+</html>

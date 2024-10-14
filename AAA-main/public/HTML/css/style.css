@@ -1,0 +1,95 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 0;
+    background-color: #fdf4e3; /* สีครีมอ่อน */
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto; /* ปรับขนาดตามเนื้อหา */
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #eacda3; /* สีครีมอมชมพู */
+    color: #5b3924; /* สีน้ำตาล */
+    text-align: center;
+    padding: 30px 0;
+    font-size: 1.5em;
+}
+
+nav {
+    background-color: #f8e5c3; /* สีครีมสว่าง */
+    padding: 15px;
+    display: flex;
+    justify-content: space-between; /* จัดตำแหน่งลิงก์และ select */
+    align-items: center; /* จัดแนวให้ตรงกลาง */
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px; /* ระยะห่างระหว่างลิงก์ */
+}
+
+.nav-links a {
+    padding: 10px 15px;
+    color: #5b3924; /* สีน้ำตาลเข้ม */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    background-color: #fff2db; /* สีพื้นหลังของลิงก์ */
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: #d4a373; /* เปลี่ยนสีเมื่อ hover */
+}
+
+select {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    padding: 10px;
+    font-size: 1.2em;
+    color: #5b3924; /* สีน้ำตาลเข้ม */
+    background-color: #fff2db; /* สีพื้นหลังของ select */
+    border: 2px solid #d4a373; /* สีน้ำตาลอ่อน */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none; /* ลบเส้นขอบเมื่อเลือก */
+    border-color: #5b3924; /* เปลี่ยนสีขอบเมื่อเลือก */
+}
+
+article {
+    background-color: #fff2db; /* สีครีมกลาง */
+    padding: 20px;
+    color: #5b3924; /* สีน้ำตาล */
+}
+
+footer {
+    background-color: #d4a373; /* สีน้ำตาลอ่อน */
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Responsive: ปรับสำหรับหน้าจอขนาดเล็กกว่า 500px */
+@media (max-width: 500px) {
+    nav {
+        flex-direction: column; /* แสดงในรูปแบบคอลัมน์ */
+        align-items: flex-start; /* จัดแนวซ้าย */
+    }
+
+    .nav-links {
+        width: 100%; /* กว้างเต็มหน้าจอ */
+        justify-content: space-between; /* จัดตำแหน่งลิงก์ */
+    }
+
+    select {
+        width: 100%; /* ให้ select ยืดเต็มหน้าจอ */
+        margin-top: 10px; /* เพิ่มระยะห่างระหว่างลิงก์และ select */
+        font-size: 1.1em; /* ลดขนาดฟอนต์ */
+    }
+}
