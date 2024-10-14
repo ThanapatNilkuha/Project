@@ -130,12 +130,12 @@
             font-size: 14px;
         }
             .grid-item img {
-            width: 400px; /* ความกว้างที่ต้องการ */
-            height: 400px; /* ความสูงที่ต้องการ */
-            object-fit: cover; /* ครอบรูปโดยไม่บิดเบือน */
+            width: 400px; 
+            height: 400px; 
+            object-fit: cover; 
         }
 
-         /* ปรับขนาดรูปภาพในป๊อปอัพ */
+       
          .popup {
             display: none;
             position: fixed;
@@ -145,25 +145,24 @@
             background-color: #fff2db;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 1000;
-            max-width: 90%; /* ลดขนาดป๊อปอัพ */
-            max-height: 90%; /* จำกัดความสูงของป๊อปอัพ */
-            overflow: auto; /* เพิ่มการเลื่อนหากเนื้อหาเกินขนาด */
+            max-width: 90%; 
+            max-height: 90%; 
+            overflow: auto; 
         }
 
         .popup-content {
             padding: 20px;
             text-align: center;
-            max-width: 400px; /* กำหนดความกว้างสูงสุด */
-            margin: 0 auto; /* จัดให้อยู่ตรงกลาง */
+            max-width: 400px; 
+            margin: 0 auto; 
         }
 
         .popup img {
-            width: 100%; /* ให้รูปภาพปรับขนาดตามความกว้างของป๊อปอัพ */
-            height: auto; /* รักษาอัตราส่วนของรูปภาพ */
+            width: 100%; 
+            height: auto; 
             object-fit: contain;
         }
 
-        /* ปุ่มปิดป๊อปอัพ */
         .close {
             position: absolute;
             top: 10px;
@@ -200,6 +199,7 @@
                 <div class="grid-item">
                     <img src="../../poto/art1/Model/1.webp" alt="Product Image 1" onclick="openPopup('popupModel1')">
                     <h3>สินค้า cat</h3>
+                    <h3>199 บาท</h3>
                 </div>
                 <div id="popupModel1" class="popup">
                     <div class="popup-content">
@@ -215,6 +215,7 @@
                 <div class="grid-item">
                     <img src="../../poto/art1/Model/1.jpg" alt="Product Image 2" onclick="openPopup('popupModel2')">
                     <h3>สินค้า Frieren</h3>
+                    <h3>1100 บาท</h3>
                 </div>
                 <div id="popupModel2" class="popup">
                     <div class="popup-content">
@@ -230,6 +231,7 @@
                 <div class="grid-item">
                     <img src="../../poto/art1/Model/2.jpg" alt="Product Image 3" onclick="openPopup('popupModel3')">
                     <h3>สินค้า Chisato Nishikigi</h3>
+                    <h3>1090 บาท</h3>
                 </div>
                 <div id="popupModel3" class="popup">
                     <div class="popup-content">
@@ -245,6 +247,7 @@
                 <div class="grid-item">
                     <img src="../../poto/art1/Model/3.jpg" alt="Product Image 4" onclick="openPopup('popupModel4')">
                     <h3>สินค้า Nekomata Okayu</h3>
+                    <h3>1390 บาท</h3>
                 </div>
                 <div id="popupModel4" class="popup">
                     <div class="popup-content">
@@ -260,6 +263,7 @@
                 <div class="grid-item">
                     <img src="../../poto/art1/Model/4.png" alt="Product Image 5" onclick="openPopup('popupModel5')">
                     <h3>สินค้า Inugami Korone</h3>
+                    <h3>1390 บาท</h3>
                 </div>
                 <div id="popupModel5" class="popup">
                     <div class="popup-content">
@@ -275,6 +279,7 @@
                 <div class="grid-item">
                     <img src="../../poto/art1/Model/5.jpg" alt="Product Image 6" onclick="openPopup('popupModel6')">
                     <h3>สินค้า Pekora</h3>
+                    <h3>1890 บาท</h3>
                 </div>
                 <div id="popupModel6" class="popup">
                     <div class="popup-content">
@@ -290,6 +295,7 @@
                 <div class="grid-item">
                     <img src="../../poto/art1/Model/6.webp" alt="Product Image 7" onclick="openPopup('popupModel7')">
                     <h3>สินค้า Gawr Gura</h3>
+                    <h3>749 บาท</h3>
                 </div>
                 <div id="popupModel7" class="popup">
                     <div class="popup-content">
@@ -305,6 +311,7 @@
                 <div class="grid-item">
                     <img src="../../poto/art1/Model/7.jpg" alt="Product Image 8" onclick="openPopup('popupModel8')">
                     <h3>สินค้า Hitori Gotoh</h3>
+                    <h3>2860 บาท</h3>
                 </div>
                 <div id="popupModel8" class="popup">
                     <div class="popup-content">
@@ -320,6 +327,7 @@
                 <div class="grid-item">
                     <img src="../../poto/art1/Model/8.jpg" alt="Product Image 9" onclick="openPopup('popupModel9')">
                     <h3>สินค้า Takina Inoue</h3>
+                    <h3>2735 บาท</h3>
                 </div>
                 <div id="popupModel9" class="popup">
                     <div class="popup-content">
@@ -338,8 +346,8 @@
 
     <script>
         function openPopup(popupId, type) {
-            document.getElementById(popupId).style.display = "flex"; // แสดง popup
-            resetQuantity(type); // รีเซ็ตค่า quantity
+            document.getElementById(popupId).style.display = "flex";
+            resetQuantity(type); 
         }
     
         function closePopup(popupId) {
@@ -348,27 +356,27 @@
     
         function addToCart(image, name, price, type, popupId, quantityId) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let quantity = parseInt(document.getElementById(quantityId).value); // ใช้ quantityId
+            let quantity = parseInt(document.getElementById(quantityId).value); 
     
             let item = cart.find(item => item.image === image && item.type === type);
             if (item) {
-                item.quantity += quantity; // เพิ่มจำนวนเข้าไปในสินค้าเดิม
+                item.quantity += quantity; 
             } else {
-                cart.push({ image, name, price, quantity: quantity, type }); // เพิ่มสินค้าใหม่ลงในตะกร้า
+                cart.push({ image, name, price, quantity: quantity, type }); 
             }
             
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             
-            // ปิด popup
+       
             closePopup(popupId);
             
-            // แสดงข้อความว่าเพิ่มลงตะกร้าแล้ว
+           
             alert("เพิ่มลงตะกร้าแล้ว");
         }
     
         function resetQuantity(type) {
-            document.getElementById(`quantity${type}`).value = 1; // ตั้งค่า input เป็น 1
+            document.getElementById(`quantity${type}`).value = 1; 
         }
     
         function updateCartCount() {

@@ -117,11 +117,9 @@
         </nav>
         <article>
             <div class="cart-container" id="cart">
-                <!-- Items will be dynamically added here by JavaScript -->
             </div>
             <div class="cart-summary">
                 <div class="cart-total" id="cart-total">
-                    <!-- Total will be dynamically calculated here by JavaScript -->
                 </div>
                 <button class="checkout-button" onclick="checkout()">ชำระเงิน</button>
             </div>
@@ -149,24 +147,24 @@
                 total = 0;
 
                 cart.forEach(item => {
-                    // Create a cart item element
+
                     let cartItem = document.createElement('div');
                     cartItem.className = 'cart-item';
 
-                    // Create item image
+
                     let itemImage = document.createElement('img');
-                    // Determine image path based on item type
+
                     let imagePath = item.type === 'Art toy' ? 
                         `../../poto/art1/Art toy/${item.image}` : 
                         `../../poto/art1/Model/${item.image}`;
                     itemImage.src = imagePath;
                     cartItem.appendChild(itemImage);
 
-                    // Create item details
+
                     let itemDetails = document.createElement('div');
                     itemDetails.innerHTML = `<h3>${item.name}</h3><p>ราคา: ${item.price} บาท</p>`;
 
-                    // Create quantity controls
+
                     let quantityControls = document.createElement('div');
                     quantityControls.className = 'quantity-controls';
                     let minusButton = document.createElement('button');
@@ -184,19 +182,19 @@
                     itemDetails.appendChild(quantityControls);
                     cartItem.appendChild(itemDetails);
 
-                    // Add item to cart container
+
                     cartContainer.appendChild(cartItem);
 
-                    // Update total
+ 
                     total += item.price * item.quantity;
                 });
 
-                // Display total
+
                 cartTotal.textContent = `รวมทั้งหมด: ${total} บาท`;
             }
 
             function updateQuantity(item, change) {
-                // Update quantity based on both name and type
+
                 let index = cart.findIndex(cartItem => cartItem.name === item.name && cartItem.type === item.type);
                 if (index !== -1) {
                     cart[index].quantity += change;
@@ -204,17 +202,17 @@
                         cart.splice(index, 1);
                     }
                     localStorage.setItem('cart', JSON.stringify(cart));
-                    renderCart(); // Update the cart display
+                    renderCart(); 
                 }
             }
 
-            renderCart(); // Initial render
+            renderCart(); 
         });
 
         function checkout() {
             alert('ขอบคุณที่ชำระเงิน! การชำระเงินสำเร็จ');
             localStorage.removeItem('cart');
-            location.reload(); // Reload the page to clear the cart display
+            location.reload(); 
         }
     </script>
 </body>
